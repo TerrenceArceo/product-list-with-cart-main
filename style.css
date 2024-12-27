@@ -1,0 +1,12 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    --accent-color: #C73B0F;
+    --dark-color: #260F08;
+}
+
+body {
+    font-family: "Red Hat Text", serif;
+}
+
