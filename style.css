@@ -8,5 +8,166 @@
 
 body {
     font-family: "Red Hat Text", serif;
+    font-size: 16px;
+    background-color: #FCF8F6;
 }
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: .5em 0;
+}
+
+.name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.category {
+    font-size: .875rem;
+    color: #87635A;
+    margin-top: 1.5em;
+}
+
+.price {
+    color: var(--accent-color);
+    margin-bottom: 1.5em;
+}
+
+.main-img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* =======
+    main layout
+=======*/
+
+.main-layout {
+    display: grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(200px, 375px) minmax(1em, 1fr);
+}
+
+/* ========
+    grid items
+=========*/
+
+.title,
+.dessert-list,
+.cart-container {
+    grid-column: 2 / -2;
+}
+
+/* ========
+    dessert list styling
+========*/
+
+.dessert-item {
+    position: relative;
+}
+
+.add-to-cart-icon {
+    width: 1.5em;
+}
+
+.add-btn {
+    position: absolute;
+    bottom: 5.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    background-color: #fff;
+    border: 1px solid var(--accent-color);
+    padding: .8em 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+}
+
+.add-btn:hover,
+.add-btn:focus {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.btn {
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ===========
+    cart styling
+===========*/
+
+.cart-container {
+    background-color: #fff;
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+.cart-title {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.cart-content {
+    text-align: center;
+    padding-top: 2em;
+}
+
+.empty-cart-message {
+    font-size: .875rem;
+    color: #87635A;
+}
+
+/* ============
+    media query
+============ */
+
+@media (min-width: 712px) {
+    .main-layout {
+        grid-template-columns: minmax(1em, 1fr) minmax(300px, 1000px) minmax(1em, 1fr);
+    }
+
+    .dessert-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, 250px));
+        gap: 2em;
+    }
+
+    .add-btn {
+        bottom: 5.6em;
+    }
+
+    .main-img {
+        object-fit: cover;
+    }
+
+    .price {
+        margin-bottom: 0;
+    }
+
+    .cart {
+        margin-top: 2em;
+    }
+}
+
+@media (min-width: 860px) {
+    body {
+        display: flex;
+    }
+
+    .col-1 {
+        width: 75%;
+    }
+
+    .col-2 {
+        width: 25%;
+        align-self: start;
+    }
+}
+
 
