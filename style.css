@@ -54,7 +54,7 @@ h1 {
 
 .title,
 .dessert-list,
-.cart-container {
+.cart {
     grid-column: 2 / -2;
 }
 
@@ -134,7 +134,7 @@ h1 {
 
     .dessert-list {
         display: grid;
-        grid-template-columns: repeat(3, minmax(100px, 250px));
+        grid-template-columns: repeat(3, minmax(100px, 350px));
         gap: 2em;
     }
 
@@ -155,18 +155,29 @@ h1 {
     }
 }
 
-@media (min-width: 860px) {
-    body {
-        display: flex;
+@media (min-width: 960px) {
+    .main-layout {
+        grid-template-columns: minmax(1em, 200px) repeat(3, minmax(350px, 1fr)) minmax(1em, 200px);
     }
 
-    .col-1 {
-        width: 75%;
+    #main {
+        grid-template-areas: 
+            ". header header cart ."
+            ". desserts desserts cart .";
+        column-gap: 1em;
     }
 
-    .col-2 {
-        width: 25%;
-        align-self: start;
+    .title {
+        grid-area: header;
+    }
+
+    .dessert-list {
+        grid-area: desserts;
+    }
+
+    .cart {
+        grid-area: cart;
+        /* justify-self: end; */
     }
 }
 
