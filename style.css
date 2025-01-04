@@ -85,9 +85,14 @@ h1 {
     gap: .5em;
 }
 
-.add-btn:hover,
-.add-btn:focus {
-    background-color: var(--accent-color);
+.atc:hover,
+.atc:focus {
+    color: var(--accent-color);
+}
+
+/* can we change html text on hover effect just using css */
+
+svg {
     color: #fff;
 }
 
@@ -96,6 +101,33 @@ h1 {
     font-size: .75rem;
     font-weight: 600;
     cursor: pointer;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.inc-dec-btn {
+    background-color: var(--accent-color);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dec, .inc {
+    border: 1px solid #fff;
+    display: inline-block;
+    width: 15px;
+    min-height: 15px;
+    padding: .2em;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.dec:hover,
+.inc:hover {
+    background-color: #fff;
+    color: #C73B0F;
 }
 
 /* ===========
@@ -157,7 +189,7 @@ h1 {
 
 @media (min-width: 960px) {
     .main-layout {
-        grid-template-columns: minmax(1em, 200px) repeat(3, minmax(350px, 1fr)) minmax(1em, 200px);
+        grid-template-columns: minmax(1em, 200px) repeat(3, minmax(325px, 1fr)) minmax(1em, 200px);
     }
 
     #main {
