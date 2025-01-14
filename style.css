@@ -75,7 +75,7 @@ h1 {
     bottom: 5.6em;
     left: 50%;
     transform: translateX(-50%);
-    width: 140px;
+    width: 160px;
     background-color: #fff;
     border: 1px solid var(--accent-color);
     padding: .8em 1.5em;
@@ -91,10 +91,6 @@ h1 {
 }
 
 /* can we change html text on hover effect just using css */
-
-svg {
-    color: #fff;
-}
 
 .btn {
     border-radius: 999px;
@@ -129,6 +125,44 @@ svg {
     background-color: #fff;
     color: #C73B0F;
 }
+
+/* second styling for buttons */
+
+.add-btn-container {
+    border-radius: 999px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 160px;
+    position: absolute;
+    bottom: 4.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+}
+
+.dec-btn {
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border: none;
+    padding: .8em 1em;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.count-container {
+    color: #fff;
+}
+
+.inc-btn {
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    border: none;
+    padding: .8em 1em;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
 
 /* ===========
     cart styling
