@@ -16,31 +16,31 @@ fetch('../data.json')
                 document.querySelector(`div[data-atc="${e.target.parentElement.id}"]`).style.visibility = "visible"
                 incrementOrderCount(dessertData, Number(e.target.parentElement.id))
             } else if (e.target.dataset.dec === e.target.id) {
-                decrementOrderCount(dessertData, Number(e.target.parentElement.id))
+                decrementOrderCount(dessertData, Number(e.target.parentElement.classList[1]))
             } else if (e.target.dataset.inc === e.target.id) {
-                incrementOrderCount(dessertData, Number(e.target.parentElement.id))
+                incrementOrderCount(dessertData, Number(e.target.parentElement.classList[1]))
             }
         })
 
-        function decrementOrderCount(listOfDesserts, parentId) {
+        function decrementOrderCount(listOfDesserts, parentClass) {
             let targetObj = listOfDesserts.filter((dessert, index) => {
-                if (index === parentId) {
+                if (index === parentClass) {
                     return dessert
                 }
             })
             targetObj[0].orderCount--
-            document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj[0].orderCount
+            document.querySelector(`span[data-counter="counter${parentClass}"]`).textContent = targetObj[0].orderCount
         }
         
 
-        function incrementOrderCount(listOfDesserts, parentId) {
+        function incrementOrderCount(listOfDesserts, parentClass) {
             let targetObj = listOfDesserts.filter((dessert, index) => {
-                if (index === parentId) {
+                if (index === parentClass) {
                     return dessert
                 }
             })
             targetObj[0].orderCount++
-            document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj[0].orderCount
+            document.querySelector(`span[data-counter="counter${parentClass}"]`).textContent = targetObj[0].orderCount
         }
         
         let htmlContent = ''
@@ -60,13 +60,13 @@ fetch('../data.json')
                     <img src="../assets/images/icon-add-to-cart.svg" class="add-to-cart-icon" >
                     Add to Cart
                 </button>
-                <div class="add-btn-container hidden" data-atc="${index}" id="${index}">
-                    <button class="dec-btn" data-dec="dec${index}" id="dec${index}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="dec" width="10" height="2" fill="currentcolor" viewBox="0 0 10 2"><path fill="currentcolor" d="M0 .375h10v1.25H0V.375Z"/></svg>
+                <div class="add-btn-container hidden" data-atc="${index}" >
+                    <button class="dec-btn ${index}" >
+                        <svg xmlns="http://www.w3.org/2000/svg" data-dec="dec${index}" id="dec${index}" class="dec" width="10" height="2" fill="currentcolor" viewBox="0 0 10 2"><path fill="currentcolor" d="M0 .375h10v1.25H0V.375Z"/></svg>
                     </button>
                         <span class="count-container" data-counter="counter${index}">${dessert.orderCount}</span>
-                    <button class="inc-btn" data-inc="inc${index}" id="inc${index}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="inc" width="10" height="10" fill="currentcolor" viewBox="0 0 10 10"><path fill="currentcolor" d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/></svg>
+                    <button class="inc-btn ${index}" >
+                        <svg xmlns="http://www.w3.org/2000/svg" data-inc="inc${index}" id="inc${index}" class="inc" width="10" height="10" fill="currentcolor" viewBox="0 0 10 10"><path fill="currentcolor" d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/></svg>
                     </button>
                 </div>
                 <p class="category">${dessert.category}</p>
