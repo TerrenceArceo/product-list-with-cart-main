@@ -30,6 +30,10 @@ fetch('../data.json')
             })
             targetObj[0].orderCount--
             document.querySelector(`span[data-counter="counter${parentClass}"]`).textContent = targetObj[0].orderCount
+            if (targetObj[0].orderCount === 0) {
+                document.querySelector(`div[data-atc="${parentClass}"]`).style.visibility = "hidden"
+                document.querySelector(`button[id="atc${parentClass}"]`).style.visibility = "visible"
+            }
         }
         
 
