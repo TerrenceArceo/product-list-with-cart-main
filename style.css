@@ -139,33 +139,40 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--accent-color);
+    padding: .5em 1.2em;
 }
 
-.dec-btn {
-    border-top-left-radius: 999px;
-    border-bottom-left-radius: 999px;
-    border: none;
-    padding: .8em 1em;
+.dec-btn,
+.inc-btn {
+    border: 1px solid #fff;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
     background-color: var(--accent-color);
     cursor: pointer;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dec-btn:hover,
+.dec-btn:focus,
+.inc-btn:hover,
+.inc-btn:focus {
+    color: var(--accent-color);
+    background-color: #fff;
 }
 
 .count-container {
     color: #fff;
 }
 
-.inc-btn {
-    border-top-right-radius: 999px;
-    border-bottom-right-radius: 999px;
-    border: none;
-    padding: .8em 1em;
-    background-color: var(--accent-color);
-    cursor: pointer;
-}
+
 
 
 /* ===========
-    cart styling
+    cart styling        
 ===========*/
 
 .cart-container {
@@ -175,18 +182,65 @@ h1 {
 }
 
 .cart-title {
-    margin-top: 0;
+    margin: 0;
     color: var(--accent-color);
 }
 
 .cart-content {
     text-align: center;
-    padding-top: 2em;
+    padding-top: 2em; 
 }
 
 .empty-cart-message {
     font-size: .875rem;
     color: #87635A;
+}
+
+.item-container {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F5EEEC;
+    padding: 1em 0;
+}
+
+.item-title {
+    font-size: .9rem;
+    font-weight: 500;
+    margin-bottom: .5em;
+}
+
+.quantity-container {
+    display: flex;
+    column-gap: 1em;
+}
+
+.quantity {
+    color: var(--accent-color);
+}
+
+.displayed-price,
+.amount {
+    color: #87635A;
+}
+
+.amount {
+    font-weight: 600;
+}
+
+.delete-btn {
+    color: #AD8A85;
+    background-color: transparent;
+    border: 2px solid #AD8A85;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: .1em;
 }
 
 /* ============
