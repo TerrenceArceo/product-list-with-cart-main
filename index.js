@@ -2,7 +2,7 @@ const dessertList = document.getElementById("dessert-list")
 const cart = document.getElementById("cart")
 let dessertData
 let totalCount = 0
-let item = ''
+let chosenItemsList = []
 
 
 fetch('../data.json')
@@ -19,7 +19,8 @@ fetch('../data.json')
                 incrementOrderCount(dessertData, Number(e.target.parentElement.id))
                 totalCount++
                 document.getElementById('cart-title').textContent = `Your Cart ${totalCount}`
-                itemOrder(dessertData, Number(e.target.parentElement.id))
+                chosenItem(dessertData, Number(e.target.parentElement.id))
+                renderChosenItems(chosenItemsList)
             } else if (e.target.dataset.dec === e.target.id) {
                 decrementOrderCount(dessertData, Number(e.target.parentElement.id))
                 totalCount--
@@ -43,6 +44,7 @@ fetch('../data.json')
                 document.querySelector(`div[data-atc="${parentId}"]`).style.visibility = "hidden"
                 document.querySelector(`button[id="atc${parentId}"]`).style.visibility = "visible"
             }
+            renderChosenItems(chosenItemsList)
         }
         
 
@@ -54,41 +56,41 @@ fetch('../data.json')
             })
             targetObj[0].orderCount++
             document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj[0].orderCount
+            renderChosenItems(chosenItemsList)
         }
 
-        function itemOrder(listOfDesserts, parentId) {
-            // if (totalCount <= 0) {
-            //     document.getElementById('cart-content').innerHTML = `
-            //         <img class="empty-cart-cake" src="../assets/images/illustration-empty-cart.svg" alt="a picture of cake illustrating that a cart is empty">
-            //         <p class="empty-cart-message">Your added items will appear here</p>
-            //     `
-            // } else {
-
-            // }
-
+        function chosenItem(listOfDesserts, parentId) {
             let targetObj = listOfDesserts.filter((dessert, index) => {
                 if (index === parentId) {
                     return dessert
                 }
             })[0]
 
-            let totalAmount = targetObj.price * targetObj.orderCount
+            chosenItemsList.push(targetObj)
+        }
 
-            item += `
-                <div class="item-container">
-                    <div>
-                        <h3 class="item-title">${targetObj.name}</h3>
-                        <div class="quantity-container">
-                            <p class="quantity">${targetObj.orderCount}x</p>
-                            <p class="displayed-price">@ ${targetObj.price.toFixed(2)}</p>
-                            <p class="amount">$${totalAmount.toFixed(2)}</p>
+        function renderChosenItems(list) {
+            let chosenItemHtml = ''
+
+            list.forEach(item => {
+                let totalAmount = item.price * item.orderCount
+
+                chosenItemHtml += `
+                    <div class="item-container">
+                        <div>
+                            <h3 class="item-title">${item.name}</h3>
+                            <div class="quantity-container">
+                                <p class="quantity">${item.orderCount}x</p>
+                                <p class="displayed-price">@ ${item.price.toFixed(2)}</p>
+                                <p class="amount">$${totalAmount.toFixed(2)}</p>
+                            </div>
                         </div>
+                        <button class="delete-btn">&#x00D7;</button>
                     </div>
-                    <button class="delete-btn">&#x00D7;</button>
-                </div>
-            `
+                `
+            })
 
-            document.getElementById('cart-content').innerHTML = item
+            document.getElementById('cart-content').innerHTML = chosenItemHtml
         }
         
         let htmlContent = ''
@@ -126,7 +128,7 @@ fetch('../data.json')
 
         dessertList.innerHTML = htmlContent
 
-        const cartHtmlContent = () => {
+        const cartHtml = () => {
             cart.innerHTML = `
                 <div class="cart-container">
                     <h2 class="cart-title" id="cart-title">Your Cart ${totalCount}</h2>
@@ -136,5 +138,5 @@ fetch('../data.json')
             `
             }
             
-        cartHtmlContent()
+        cartHtml()
 })
