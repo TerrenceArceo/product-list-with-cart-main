@@ -12,23 +12,24 @@ fetch('../data.json')
 
         document.addEventListener('click', e => {
             e.preventDefault()
+            const cartTitle = document.getElementById('cart-title')
         
             if (e.target.dataset.targetbtn === e.target.id) {
                 e.target.style.visibility = 'hidden'
                 document.querySelector(`div[data-atc="${e.target.parentElement.id}"]`).style.visibility = "visible"
                 incrementOrderCount(dessertData, Number(e.target.parentElement.id))
                 totalCount++
-                document.getElementById('cart-title').textContent = `Your Cart ${totalCount}`
+                cartTitle.textContent = `Your Cart ${totalCount}`
                 chosenItem(dessertData, Number(e.target.parentElement.id))
                 renderChosenItems(chosenItemsList)
             } else if (e.target.dataset.dec === e.target.id) {
                 decrementOrderCount(dessertData, Number(e.target.parentElement.id))
                 totalCount--
-                document.getElementById('cart-title').textContent = `Your Cart ${totalCount}`
+                cartTitle.textContent = `Your Cart ${totalCount}`
             } else if (e.target.dataset.inc === e.target.id) {
                 incrementOrderCount(dessertData, Number(e.target.parentElement.id))
                 totalCount++
-                document.getElementById('cart-title').textContent = `Your Cart ${totalCount}`
+                cartTitle.textContent = `Your Cart ${totalCount}`
             }
         })
 

@@ -85,8 +85,8 @@ h1 {
     gap: .5em;
 }
 
-.atc:hover,
-.atc:focus {
+.add-btn:hover,
+.add-btn:focus {
     color: var(--accent-color);
 }
 
