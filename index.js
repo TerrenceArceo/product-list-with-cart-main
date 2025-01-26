@@ -38,12 +38,14 @@ fetch('../data.json')
                 if (index === parentId) {
                     return dessert
                 }
-            })
-            targetObj[0].orderCount--
-            document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj[0].orderCount
-            if (targetObj[0].orderCount === 0) {
+            })[0]
+            targetObj.orderCount--
+            document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj.orderCount
+            if (targetObj.orderCount === 0) {
                 document.querySelector(`div[data-atc="${parentId}"]`).style.visibility = "hidden"
                 document.querySelector(`button[id="atc${parentId}"]`).style.visibility = "visible"
+                chosenItemsList.splice(chosenItemsList.indexOf(targetObj), 1)
+                renderChosenItems(chosenItemsList)
             }
             renderChosenItems(chosenItemsList)
         }
