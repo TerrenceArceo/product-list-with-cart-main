@@ -73,15 +73,22 @@ fetch('../data.json')
 
         function renderCartContent(list) {
             let chosenItemHtml = ''
+            let confirmOrderArea = ''
+            let totalPurchasingAmount = 0
+
+            chosenItemsList.forEach(item => {
+                totalPurchasingAmount += item.orderCount * item.price
+            })
 
             if (list.length === 0) {
                 chosenItemHtml = `
                     <img src="../assets/images/illustration-empty-cart.svg" class="empty-cart-icon">
                     <p class="empty-cart-message">Your added items will appear here</p>
                 `
+                confirmOrderArea = ''
             } else {
                 list.forEach(item => {
-                    let totalAmount = item.price * item.orderCount
+                    let totalItemPrice = item.price * item.orderCount
     
                     chosenItemHtml += `
                         <div class="item-container">
@@ -90,16 +97,27 @@ fetch('../data.json')
                                 <div class="quantity-container">
                                     <p class="quantity">${item.orderCount}x</p>
                                     <p class="displayed-price">@ ${item.price.toFixed(2)}</p>
-                                    <p class="amount">$${totalAmount.toFixed(2)}</p>
+                                    <p class="amount">$${totalItemPrice.toFixed(2)}</p>
                                 </div>
                             </div>
                             <button class="delete-btn">&#x00D7;</button>
                         </div>
                     `
                 })
+                confirmOrderArea = `
+                    <div class="order-total">
+                        <p>Order Total</p>
+                        <h2>$${totalPurchasingAmount.toFixed(2)}</h2>
+                    </div>
+                    <div class="carbon-neutral">
+                        <img src="../assets/images/icon-carbon-neutral.svg" class="carbon-neutral-icon">
+                        <p>This is a <span>carbon-neutral</span> delivery </p>
+                    </div>
+                    <button class="confirm-btn">Confirm Order</button>
+                `
             }
 
-            document.getElementById('cart-content').innerHTML = chosenItemHtml
+            document.getElementById('cart-content').innerHTML = chosenItemHtml + confirmOrderArea
         }
         
         let htmlContent = ''

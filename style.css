@@ -243,6 +243,53 @@ h1 {
     padding-top: .1em;
 }
 
+/* =========
+    confirm order
+=========*/
+
+.order-total,
+.carbon-neutral {
+    display: flex;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.order-total {
+    justify-content: space-between;
+    padding: 1.5em 0;
+}
+
+.carbon-neutral {
+    justify-content: center;
+    padding: 1em 0;
+    column-gap: .5em;
+    background-color: #FCF8F6;
+}
+
+.carbon-neutral span {
+    font-weight: 500;
+}
+
+.confirm-btn {
+    color: #fff;
+    background-color: var(--accent-color);
+    font-size: 1rem;
+    border: none;
+    display: block;
+    width: 100%;
+    padding: 1em;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-top: 1.5em;
+}
+
+.confirm-btn:hover,
+.confirm-btn:focus {
+    background-color: color-mix(in hsl, hsl(14 86 42) 100%, #000000 25%)
+}
+
+
 /* ============
     media query
 ============ */
