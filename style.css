@@ -182,7 +182,8 @@ h1 {
 }
 
 .cart-title {
-    margin: 0;
+    margin: -1em 0 1em;
+    text-align: left;
     color: var(--accent-color);
 }
 
