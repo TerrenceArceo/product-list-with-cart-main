@@ -7,24 +7,19 @@ let chosenItemsList = []
 
 document.addEventListener('click', e => {
     e.preventDefault()
-    const cartTitle = document.getElementById('cart-title')
-
     if (e.target.dataset.targetbtn === e.target.id) {
         e.target.style.visibility = 'hidden'
         document.querySelector(`div[data-atc="${e.target.parentElement.id}"]`).style.visibility = "visible"
         incrementOrderCount(dessertData, Number(e.target.parentElement.id))
         totalOrderCount++
-        cartTitle.textContent = `Your Cart ${totalOrderCount}`
         chosenItem(dessertData, Number(e.target.parentElement.id))
         renderCartContent(chosenItemsList)
     } else if (e.target.dataset.dec === e.target.id) {
-        decrementOrderCount(dessertData, Number(e.target.parentElement.id))
         totalOrderCount--
-        cartTitle.textContent = `Your Cart ${totalOrderCount}`
+        decrementOrderCount(dessertData, Number(e.target.parentElement.id))
     } else if (e.target.dataset.inc === e.target.id) {
-        incrementOrderCount(dessertData, Number(e.target.parentElement.id))
         totalOrderCount++
-        cartTitle.textContent = `Your Cart ${totalOrderCount}`
+        incrementOrderCount(dessertData, Number(e.target.parentElement.id))
     } else if (e.target.dataset.delete) {
         deleteItem(chosenItemsList, Number(e.target.id))
         cartTitle.textContent = `Your Cart ${totalOrderCount}`
@@ -82,6 +77,7 @@ function chosenItem(listOfDesserts, parentId) {
 }
 
 function renderCartContent(list) {
+    let cartOrderQuantity = ''
     let chosenItemHtml = ''
     let confirmOrderArea = ''
     let totalPurchasingAmount = 0
@@ -91,12 +87,17 @@ function renderCartContent(list) {
     })
 
     if (list.length === 0) {
+        cartOrderQuantity = `<h2 class="cart-title" id="cart-title">Your Cart ${totalOrderCount}</h2>`
+
         chosenItemHtml = `
             <img src="../assets/images/illustration-empty-cart.svg" class="empty-cart-icon">
             <p class="empty-cart-message">Your added items will appear here</p>
         `
+
         confirmOrderArea = ''
     } else {
+        cartOrderQuantity = `<h2 class="cart-title" id="cart-title">Your Cart ${totalOrderCount}</h2>`
+
         list.forEach((item, index) => {
             let totalItemPrice = item.price * item.orderCount
 
@@ -114,6 +115,7 @@ function renderCartContent(list) {
                 </div>
             `
         })
+
         confirmOrderArea = `
             <div class="order-total">
                 <p>Order Total</p>
@@ -127,7 +129,7 @@ function renderCartContent(list) {
         `
     }
 
-    document.getElementById('cart-content').innerHTML = chosenItemHtml + confirmOrderArea
+    document.getElementById('cart-content').innerHTML = cartOrderQuantity +  chosenItemHtml + confirmOrderArea
 }
 
 fetch('../data.json')
