@@ -22,7 +22,6 @@ document.addEventListener('click', e => {
         incrementOrderCount(dessertData, Number(e.target.parentElement.id))
     } else if (e.target.dataset.delete) {
         deleteItem(chosenItemsList, Number(e.target.id))
-        cartTitle.textContent = `Your Cart ${totalOrderCount}`
     }
 })
 
@@ -55,15 +54,24 @@ function incrementOrderCount(listOfDesserts, parentId) {
 }
 
 function deleteItem(list, id) {
+    let newCount = 0
+
     const targetObj = list.filter((dessert, index) => {
         if (index === id) {
             return dessert
         }
     })[0]
     targetObj.orderCount = 0
+
     chosenItemsList.splice(chosenItemsList.indexOf(targetObj), 1)
+
+    chosenItemsList.forEach(item => {
+        newCount += item.orderCount
+    })
+
+    totalOrderCount = newCount
+
     renderCartContent(list)
-    // console.log(targetObj)
 }
 
 function chosenItem(listOfDesserts, parentId) {
