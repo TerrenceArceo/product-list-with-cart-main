@@ -26,7 +26,7 @@ h1 {
 .category {
     font-size: .875rem;
     color: #87635A;
-    margin-top: 1.5em;
+    margin-top: .5em;
 }
 
 .price {
@@ -34,9 +34,15 @@ h1 {
     margin-bottom: 1.5em;
 }
 
+.name,
+.price {
+    margin-top: .2em;
+}
+
 .main-img {
     border-radius: 8px;
     width: 100%;
+    margin-bottom: 1em;
 }
 
 /* =======
@@ -72,7 +78,7 @@ h1 {
 
 .add-btn {
     position: absolute;
-    bottom: 5.6em;
+    bottom: 6.3em;
     left: 50%;
     transform: translateX(-50%);
     width: 160px;
@@ -135,7 +141,7 @@ h1 {
     align-items: center;
     width: 160px;
     position: absolute;
-    bottom: 4.3em;
+    bottom: 4.8em;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--accent-color);
@@ -242,6 +248,13 @@ h1 {
     justify-content: center;
     align-items: center;
     padding-top: .1em;
+    cursor: pointer;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+    color: #260F08;
+    border-color: #260F08;
 }
 
 /* =========
@@ -307,7 +320,11 @@ h1 {
     }
 
     .add-btn {
-        bottom: 5.6em;
+        bottom: 6.3em;
+    }
+
+    .add-btn-container {
+        bottom: 4.8em;
     }
 
     .main-img {
@@ -341,6 +358,7 @@ h1 {
 
     .dessert-list {
         grid-area: desserts;
+        margin-bottom: 2em;
     }
 
     .cart {
