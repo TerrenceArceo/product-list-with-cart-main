@@ -61,8 +61,8 @@ function deleteItem(list, id) {
             return dessert
         }
     })[0]
-    targetObj.orderCount = 0
 
+    targetObj.orderCount = 0
     chosenItemsList.splice(chosenItemsList.indexOf(targetObj), 1)
 
     chosenItemsList.forEach(item => {
@@ -72,6 +72,14 @@ function deleteItem(list, id) {
     totalOrderCount = newCount
 
     renderCartContent(list)
+
+    dessertData.forEach((dessert, index) => {
+        if (dessert === targetObj) {
+            document.querySelector(`span[data-counter="counter${index}"]`).textContent = targetObj.orderCount
+            document.querySelector(`div[data-atc="${index}"]`).style.visibility = "hidden"
+            document.querySelector(`button[id="atc${index}"]`).style.visibility = "visible"
+        }
+    })
 }
 
 function chosenItem(listOfDesserts, parentId) {
