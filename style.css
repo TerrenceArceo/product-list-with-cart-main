@@ -284,7 +284,8 @@ h1 {
     font-weight: 500;
 }
 
-.confirm-btn {
+.confirm-btn,
+.new-order-btn {
     color: #fff;
     background-color: var(--accent-color);
     font-size: 1rem;
@@ -299,11 +300,99 @@ h1 {
 }
 
 .confirm-btn:hover,
-.confirm-btn:focus {
+.confirm-btn:focus,
+.new-order-btn:hover,
+.new-order-btn:focus {
     background-color: color-mix(in hsl, hsl(14 86 42) 100%, #000000 25%)
 }
 
+/* ===============
+    modal
+==================*/
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.5);
+    display: none; 
+}
+
+.modal {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2em 1fr 2em;
+    border-radius: 12px;
+  }
+
+  .confirmed-order-top {
+    grid-column: 2 / -2;
+    padding: 2.75em 0 2em;
+  }
+
+  .order-container {
+    background-color: #FCF8F6;
+    grid-column: 2 / -2;
+    max-height: 40vh;
+    overflow-y: scroll;
+  }
+
+  .new-order-btn {
+    grid-column: 2 / -2;
+    margin-bottom: 2.5em;
+  }
+
+  .order {
+    display: grid;
+    grid-template-columns: auto 1em 1fr 1fr auto;
+    grid-template-areas: 
+        "img . title title total"
+        "img . quantity quantity total";
+    padding: 1.5em;
+    border-bottom: 1px solid #F5EEEC;
+  }
+
+  .octitle {
+    font-size: 40px;
+  }
+
+  .img-thumbnail {
+    width: 48px;
+    height: 48px;
+    grid-area: img;
+  }
+
+  .order-title,
+  .quantity,
+  .displayed-price {
+    font-size: .9rem;
+  }
+
+  .order-title {
+    grid-area: title;
+    font-weight: 500;
+  }
+
+  .quantity-container {
+    grid-area: quantity;
+  }
+
+  .amount {
+    grid-area: total;
+    align-self: center;
+  }
+
+  .modal .order-total {
+    padding: 1.5em;
+  }
+  
 /* ============
     media query
 ============ */
@@ -338,6 +427,11 @@ h1 {
     .cart {
         margin-top: 2em;
     }
+
+    .modal {
+        width: 90%;
+        margin: 0 auto;
+    }
 }
 
 @media (min-width: 960px) {
@@ -364,6 +458,10 @@ h1 {
     .cart {
         grid-area: cart;
         /* justify-self: end; */
+    }
+
+    .modal {
+        width: 592px;
     }
 }
 

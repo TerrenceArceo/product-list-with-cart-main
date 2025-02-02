@@ -5,6 +5,7 @@ let totalOrderCount = 0
 let chosenItemsList = []
 
 
+
 document.addEventListener('click', e => {
     e.preventDefault()
     if (e.target.dataset.targetbtn === e.target.id) {
@@ -22,8 +23,21 @@ document.addEventListener('click', e => {
         incrementOrderCount(dessertData, Number(e.target.parentElement.id))
     } else if (e.target.dataset.delete) {
         deleteItem(chosenItemsList, Number(e.target.id))
+    } else if (e.target.dataset.confirm) {
+        console.log("hello")
+        confirmOrder(chosenItemsList)
     }
 })
+
+function chosenItem(listOfDesserts, parentId) {
+    let targetObj = listOfDesserts.filter((dessert, index) => {
+        if (index === parentId) {
+            return dessert
+        }
+    })[0]
+
+    chosenItemsList.push(targetObj)
+}
 
 function decrementOrderCount(listOfDesserts, parentId) {
     let targetObj = listOfDesserts.filter((dessert, index) => {
@@ -82,14 +96,57 @@ function deleteItem(list, id) {
     })
 }
 
-function chosenItem(listOfDesserts, parentId) {
-    let targetObj = listOfDesserts.filter((dessert, index) => {
-        if (index === parentId) {
-            return dessert
-        }
-    })[0]
+function confirmOrder(list) {
+    const overlay = document.getElementById('overlay')
+    const modal = document.getElementById('modal')
+    let orderConfirmation = ''
+    let order = ''
+    let total = ''
+    let startNewOrderbtn = ''
+    let totalPurchasingAmount = 0
 
-    chosenItemsList.push(targetObj)
+    chosenItemsList.forEach(item => {
+        totalPurchasingAmount += item.orderCount * item.price
+    })
+
+    overlay.style.display = 'block'
+
+    orderConfirmation = `
+        <div class="confirmed-order-top">
+            <img src="../assets/images/icon-order-confirmed.svg" class="order-confirmation-icon">
+            <h2 class="octitle">Order Confirmed</h2>
+            <p class="ocsubtitle">We hope you enjoy your food</p>
+        </div>
+    `
+
+    list.forEach((item, index) => {
+        let totalItemPrice = item.price * item.orderCount
+
+        order += `
+            <div class="order">
+                <img src="${item.image.thumbnail}" class="img-thumbnail">
+                <h3 class="order-title">${item.name}</h3>
+                <div class="quantity-container">
+                    <p class="quantity">${item.orderCount}x</p>
+                    <p class="displayed-price">@ ${item.price.toFixed(2)}</p>
+                </div>
+                <p class="amount">$${totalItemPrice.toFixed(2)}</p>
+            </div>
+        `
+    })
+
+    total = `
+        <div class="order-total">
+            <p>Order Total</p>
+            <h2>$${totalPurchasingAmount.toFixed(2)}</h2>
+        </div>
+    `
+
+    startNewOrderbtn = `
+        <button class="new-order-btn" data-newOrder="newOrder">Start New Order</button>
+    `
+
+    modal.innerHTML = orderConfirmation + `<div class="order-container">${order} ${total}</div>` + startNewOrderbtn
 }
 
 function renderCartContent(list) {
@@ -141,7 +198,7 @@ function renderCartContent(list) {
                 <img src="../assets/images/icon-carbon-neutral.svg" class="carbon-neutral-icon">
                 <p>This is a <span>carbon-neutral</span> delivery </p>
             </div>
-            <button class="confirm-btn">Confirm Order</button>
+            <button class="confirm-btn" data-confirm="confirm">Confirm Order</button>
         `
     }
 
