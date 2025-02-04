@@ -13,6 +13,7 @@ document.addEventListener('click', e => {
     if (e.target.dataset.targetbtn === e.target.id) {
         e.target.style.visibility = 'hidden'
         document.querySelector(`div[data-atc="${e.target.parentElement.id}"]`).style.visibility = "visible"
+        document.querySelector(`img[id="main-img-${e.target.parentElement.id}"]`).classList.add('active-border')
         incrementOrderCount(dessertData, Number(e.target.parentElement.id))
         totalOrderCount++
         chosenItem(dessertData, Number(e.target.parentElement.id))
@@ -53,6 +54,7 @@ function decrementOrderCount(listOfDesserts, parentId) {
     targetObj.orderCount--
     document.querySelector(`span[data-counter="counter${parentId}"]`).textContent = targetObj.orderCount
     if (targetObj.orderCount === 0) {
+        document.querySelector(`img[id="main-img-${parentId}"]`).classList.remove('active-border')
         document.querySelector(`div[data-atc="${parentId}"]`).style.visibility = "hidden"
         document.querySelector(`button[id="atc${parentId}"]`).style.visibility = "visible"
         chosenItemsList.splice(chosenItemsList.indexOf(targetObj), 1)
@@ -159,6 +161,7 @@ function startNewOrder() {
     dessertData.forEach((item, index) => {
         if (item.orderCount > 0) {
             item.orderCount = 0
+            document.querySelector(`img[id="main-img-${index}"]`).classList.remove('active-border')
             document.querySelector(`span[data-counter="counter${index}"]`).textContent = item.orderCount
             document.querySelector(`div[data-atc="${index}"]`).style.visibility = "hidden"
             document.querySelector(`button[id="atc${index}"]`).style.visibility = "visible"
@@ -236,9 +239,9 @@ fetch('../data.json')
             htmlContent += `
             <div class="dessert-item" id="${index}">
                 <picture>
-                    <source media="(min-width: 900px)" srcset="${dessert.image.desktop}">
-                    <source media="(min-width: 712px)" srcset="${dessert.image.tablet}">
-                    <img src="${dessert.image.mobile}" alt="IfItDoesntMatchAnyMedia" class="main-img">
+                    <source media="(min-width: 900px)" srcset="${dessert.image.desktop}" >
+                    <source media="(min-width: 712px)" srcset="${dessert.image.tablet}" >
+                    <img src="${dessert.image.mobile}" alt="a picture of ${dessert.name}" class="main-img" id="main-img-${index}">
                 </picture>
                 <button class="btn add-btn" data-targetbtn="atc${index}" id="atc${index}">             
                     <img src="../assets/images/icon-add-to-cart.svg" class="add-to-cart-icon" >
