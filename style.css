@@ -355,8 +355,10 @@ h1 {
     grid-template-areas: 
         "img . title title total"
         "img . quantity quantity total";
-    padding: 1.5em;
+    padding: 1.5em 0;
     border-bottom: 1px solid #F5EEEC;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .octitle {
