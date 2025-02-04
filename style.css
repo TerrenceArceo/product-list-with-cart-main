@@ -436,7 +436,7 @@ h1 {
 
 @media (min-width: 960px) {
     .main-layout {
-        grid-template-columns: minmax(1em, 200px) repeat(3, minmax(325px, 1fr)) minmax(1em, 200px);
+        grid-template-columns: minmax(1em, 200px) repeat(3, minmax(375px, 1fr)) minmax(1em, 200px);
     }
 
     #main {

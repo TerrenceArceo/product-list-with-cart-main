@@ -1,5 +1,7 @@
 const dessertList = document.getElementById("dessert-list")
 const cart = document.getElementById("cart")
+const overlay = document.getElementById('overlay')
+const modal = document.getElementById('modal')
 let dessertData
 let totalOrderCount = 0
 let chosenItemsList = []
@@ -24,8 +26,11 @@ document.addEventListener('click', e => {
     } else if (e.target.dataset.delete) {
         deleteItem(chosenItemsList, Number(e.target.id))
     } else if (e.target.dataset.confirm) {
-        console.log("hello")
         confirmOrder(chosenItemsList)
+    } else if (e.target.dataset.startover) {
+        startNewOrder()
+        chosenItemsList = []
+        renderCartContent(chosenItemsList)
     }
 })
 
@@ -97,8 +102,6 @@ function deleteItem(list, id) {
 }
 
 function confirmOrder(list) {
-    const overlay = document.getElementById('overlay')
-    const modal = document.getElementById('modal')
     let orderConfirmation = ''
     let order = ''
     let total = ''
@@ -143,10 +146,24 @@ function confirmOrder(list) {
     `
 
     startNewOrderbtn = `
-        <button class="new-order-btn" data-newOrder="newOrder">Start New Order</button>
+        <button class="new-order-btn" data-startover="startover">Start New Order</button>
     `
 
     modal.innerHTML = orderConfirmation + `<div class="order-container">${order} ${total}</div>` + startNewOrderbtn
+}
+
+function startNewOrder() {
+    overlay.style.display = 'none'
+    totalOrderCount = 0
+
+    dessertData.forEach((item, index) => {
+        if (item.orderCount > 0) {
+            item.orderCount = 0
+            document.querySelector(`span[data-counter="counter${index}"]`).textContent = item.orderCount
+            document.querySelector(`div[data-atc="${index}"]`).style.visibility = "hidden"
+            document.querySelector(`button[id="atc${index}"]`).style.visibility = "visible"
+        }
+    })
 }
 
 function renderCartContent(list) {
